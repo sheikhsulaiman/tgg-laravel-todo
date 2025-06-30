@@ -5,28 +5,44 @@ namespace App\Http\Controllers;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 
-
 class TodoController extends Controller
 {
-    public function index() {
-        $todos = Todo::all();
-        return view('todos.index', compact('todos'));
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 
-    public function store(Request $request) {
+    public function index()
+    {
+        $todos = auth()->user()->todos;
+        return view('dashboard', compact('todos'));
+    }
+
+    public function store(Request $request)
+    {
         $request->validate(['title' => 'required']);
-        Todo::create($request->only('title'));
-        return redirect('/');
+
+        auth()->user()->todos()->create([
+            'title' => $request->title,
+            'completed' => false,
+        ]);
+
+        return redirect('/dashboard');
     }
 
-    public function update(Request $request, $id) {
-        $todo = Todo::findOrFail($id);
+    public function update(Request $request, $id)
+    {
+        $todo = auth()->user()->todos()->findOrFail($id);
         $todo->update(['completed' => !$todo->completed]);
-        return redirect('/');
+
+        return redirect('/dashboard');
     }
 
-    public function destroy($id) {
-        Todo::destroy($id);
-        return redirect('/');
+    public function destroy($id)
+    {
+        $todo = auth()->user()->todos()->findOrFail($id);
+        $todo->delete();
+
+        return redirect('/dashboard');
     }
 }

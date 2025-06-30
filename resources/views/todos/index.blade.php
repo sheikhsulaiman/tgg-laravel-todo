@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Material 3 Todo App</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-[#f5f5f5] text-gray-900 min-h-screen flex justify-center items-start py-16 font-sans">
 
-    <div class="w-full max-w-xl bg-white shadow-lg rounded-2xl p-8 space-y-6 border border-gray-100">
+    <div class="w-full max-w-xl mx-auto bg-white shadow-lg rounded-2xl p-8 space-y-6 border border-gray-100">
         <h1 class="text-3xl font-semibold text-center text-[#1a1a1a]">📝 My Todos</h1>
 
         {{-- Add Todo Form --}}
@@ -21,9 +13,9 @@
             >
             <button
                 type="submit"
-                class="bg-primary text-white px-5 py-3 rounded-xl font-medium shadow hover:corsor-pointer hover:bg-primary-dark transition"
+                class="bg-primary text-green-500 px-5 py-3 rounded-xl font-medium shadow hover:corsor-pointer hover:bg-primary-dark transition border-2"
             >
-                Add
+                ＋ Add
             </button>
         </form>
 
@@ -59,6 +51,3 @@
             @endforeach
         </ul>
     </div>
-
-</body>
-</html>
